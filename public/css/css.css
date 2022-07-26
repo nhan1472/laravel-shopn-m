@@ -1,0 +1,88 @@
+.icon-header {
+    height: 50px;
+    width: 50px;
+}
+
+@-webkit-keyframes my {
+    0% {
+        color: #F8CD0A;
+    }
+    50% {
+        color: rgb(255, 0, 0);
+    }
+    100% {
+        color: #F8CD0A;
+    }
+}
+
+@-moz-keyframes my {
+    0% {
+        color: #F8CD0A;
+    }
+    50% {
+        color: rgb(250, 0, 0);
+    }
+    100% {
+        color: #F8CD0A;
+    }
+}
+
+@-o-keyframes my {
+    0% {
+        color: #F8CD0A;
+    }
+    50% {
+        color: rgb(248, 0, 0);
+    }
+    100% {
+        color: #F8CD0A;
+    }
+}
+
+@keyframes my {
+    0% {
+        color: #F8CD0A;
+    }
+    50% {
+        color: rgb(247, 0, 0);
+    }
+    100% {
+        color: #F8CD0A;
+    }
+}
+
+.content1 {
+    font-size: 24px;
+    font-weight: bold;
+    -webkit-animation: my 700ms infinite;
+    -moz-animation: my 700ms infinite;
+    -o-animation: my 700ms infinite;
+    animation: my 700ms infinite;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.range-slide {
+    position: relative;
+}
+
+.activemenu {
+    background-color: #0081f1;
+    font-weight: 800;
+}
+
+.pageactive {
+    background-color: red;
+    color: #fff;
+    font-weight: 800;
+}
+
+.forli {
+    margin: 5px;
+}
+
+.reload {
+    display: none;
+}
