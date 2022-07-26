@@ -92,33 +92,66 @@
     <div class="bg-success">
         <div class="container">
             <ul class="nav nav-fill navbar-expand-md navbar-light">
-                <a href="{{ route('index') }}" class="navbar-brand d-block d-md-none"><img src="{{ asset('img/logo.png') }}" alt="logo"
-                    class="icon-header"></a>
-                    <a class="d-block nav-link d-md-none d-flex" href="">
+                <a href="{{ route('index') }}" class="navbar-brand d-block d-md-none"><img
+                        src="{{ asset('img/logo.png') }}" alt="logo" class="icon-header"></a>
+                <div class="dropdown d-block d-md-none">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                        aria-expanded="false">@guest Tài khoản @else {{ Auth::user()->name }} @endguest</a>
+                    <ul class="dropdown-menu">
+                        @guest
+                        <li> <a class="nav-link {{ Request::routeIs('dangnhap') ? 'activemenu' : '' }}"
+                                href="{{ route('dangnhap') }}">Đăng nhập</a></li>
+                        <li> <a class="nav-link {{ Request::routeIs('dangky') ? 'activemenu' : '' }}"
+                                href="{{ route('dangky') }}">Đăng ký</a></li>
+                                @else
+                                @if (Auth::user()->role == 1)
+                                <li>
+                                        <a class="dropdown-item" href="{{ route('admin.index') }}">
+                                            {{ __('Quản lý trang') }}
+                                        </a>
+                                    </li>
+                                    @else
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('user.index') }}">
+                                            {{ __('Quản lý tài khoản') }}
+                                        </a>
+                                    </li>
+                                    @endif
+                                <li>
+                                <a class="dropdown-item" href="{{ route('dangxuat') }}">
+                                    {{ __('Đăng xuất') }}
+                                </a>
+                            </li>
+                                @endguest
+                    </ul>
+                </div>
+                <a class="d-block nav-link d-md-none d-flex" href="{{ route('cart.index') }}">
                     <i class="fa fa-shopping-cart py-1 " style="font-size:24px;"></i>
                     <p class="text-danger ">({{ $sl }})</p>
-                    </a>
-                    <button class="navbar-toggler justify-content-end" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                      </button> 
-                      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <li class="nav-item">
-                    <a class="nav-link {{ Request::routeIs('index') ? 'activemenu' : '' }}"
-                        href="{{ route('index') }}">Trang chủ</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ Request::routeIs('gioithieu.index') ? 'activemenu' : '' }}"
-                        href="{{ route('gioithieu.index') }}">Giới thiệu</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ Request::routeIs('sanpham.index') ? 'activemenu' : '' }}"
-                        href="{{ route('sanpham.index') }}">Sản phẩm</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ Request::routeIs('tintuc.index') ? 'activemenu' : '' }}"
-                        href="{{ route('tintuc.index') }}">Tin tức</a>
-                </li>
-                      </div>
+                </a>
+                <button class="navbar-toggler justify-content-end" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <li class="nav-item">
+                        <a class="nav-link {{ Request::routeIs('index') ? 'activemenu' : '' }}"
+                            href="{{ route('index') }}">Trang chủ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ Request::routeIs('gioithieu.index') ? 'activemenu' : '' }}"
+                            href="{{ route('gioithieu.index') }}">Giới thiệu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ Request::routeIs('sanpham.index') ? 'activemenu' : '' }}"
+                            href="{{ route('sanpham.index') }}">Sản phẩm</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ Request::routeIs('tintuc.index') ? 'activemenu' : '' }}"
+                            href="{{ route('tintuc.index') }}">Tin tức</a>
+                    </li>
+                </div>
             </ul>
         </div>
     </div>
