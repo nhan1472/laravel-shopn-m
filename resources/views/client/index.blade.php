@@ -113,7 +113,6 @@
             top: 10%;
             right: 0%;
             cursor: pointer;
-
             transform: translate(-50%, -50%);
             -ms-transform: translate(-50%, -50%);
         }
@@ -161,24 +160,24 @@
         </script>
         <div class="container mt-5">
             <h1 class="text-center text-danger">Các sản phẩm nổi bật</h1>
-            <div ng-repeat="item in listloai" class="row border pb-5 px-5">
+            <div ng-repeat="item in listloai" class="row border pb-5 ">
                 <div class="col-12 py-3">
                     <h2 class="text-center">@{{ item.name }}</h2>
                 </div>
-                <div class="col-3" ng-repeat="items in listItems |loc :$index |limitTo  :4:0">
+                <div class="col-md-3 col-lg-3 col-6 mt-md-0 mt-3" ng-repeat="items in listItems |loc :$index |limitTo  :4:0">
                     <a href="/sanpham/@{{ items.id }}">
-                        <div class="card" style="width: 18rem;">
+                        <div class="card" style="width: 100%;">
                             <img src="@{{ items.img }}" class="card-img-top image" style="max-height:300px"
                                 alt="@{{ items.ten }}">
-                            <div class="yeuthich">
+                            <div class="yeuthich d-none d-md-block">
                                 <div>
                                     <img src="{{ asset('img/yeuthich.png') }}" ng-if="!yt[items.id]"
-                                        ng-click="addyt(items.id,$event)" height="35px" width="60px" alt="yeuthich">
+                                        ng-click="addyt(items.id,$event)" height="33px" width="50px" alt="yeuthich">
                                     <img src="{{ asset('img/yeuthich1.png') }}" ng-if="yt[items.id]"
-                                        ng-click="addyt(items.id,$event)" height="45px" width="60px" alt="yeuthich">
+                                        ng-click="addyt(items.id,$event)" height="40px" width="50px" alt="yeuthich">
                                 </div>
                             </div>
-                            <div class="giamgia">
+                            <div class="giamgia  ">
                                 <div ng-if="items.giamgia>0">
                                     <a class="btn btn-danger">@{{ items.giamgia }}%</a>
                                 </div>
@@ -205,14 +204,14 @@
         </div>
         <div class="container">
             <h1 class="text-center">Các tin tức nổi bật</h1>
-            <div class="row ms-5">
-                <div class="col-4" ng-repeat="item in listTin |limitTo  :3:0">
+            <div class="row">
+                <div class="col-md-3 col-6 mt-3 mt-md-0" ng-repeat="item in listTin |limitTo  :4:0">
                     <a href="/tintuc/@{{ item.id }}" class="text-dark" style="text-decoration: none;">
-                        <div class="card" style="width: 18rem;">
+                        <div class="card" style="width: 100%;">
                             <img src="@{{ item.img }}" class="card-img-top image" style="max-height:300px"
                                 alt="@{{ item.tieude }}">
-                            <h5 class="card-title text-center">@{{ item.tieude }}</h5>
-                            <h5 class="card-title text-center">@{{ item.ngaydang | date: 'dd-MM-yyyy' }}</h5>
+                            <h5 class="card-title text-center text-truncate">@{{ item.tieude }}</h5>
+                            <h5 class="card-title text-center text-truncate">@{{ item.ngaydang | date: 'dd-MM-yyyy' }}</h5>
                         </div>
                     </a>
                 </div>

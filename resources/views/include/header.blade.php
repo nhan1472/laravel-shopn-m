@@ -91,45 +91,52 @@
     </div>
     <div class="bg-success">
         <div class="container">
-            <ul class="nav nav-fill navbar-expand-md navbar-light">
-                <a href="{{ route('index') }}" class="navbar-brand d-block d-md-none"><img
-                        src="{{ asset('img/logo.png') }}" alt="logo" class="icon-header"></a>
-                <a class="d-block nav-link d-md-none d-flex" href="{{ route('cart.index') }}">
-                    <i class="fa fa-shopping-cart py-1 " style="font-size:24px;"></i>
-                    <p class="text-danger ">({{ $sl }})</p>
-                </a>
-                <div class="dropdown d-block d-md-none">
+            <ul class=" nav nav-fill align-items-center justify-content-center navbar-expand-md navbar-light">
+                <a href="{{ route('index') }}" class="d-block mx-1  d-md-none"><img src="{{ asset('img/logo.png') }}"
+                        alt="logo" class="icon-header"></a>
+
+                <div class="dropdown mx-1 d-block d-md-none">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                        aria-expanded="false">@guest Tài khoản @else {{ Auth::user()->name }} @endguest</a>
-                    <ul class="dropdown-menu bg-successs">
+                        aria-expanded="false">@guest Tài khoản
+                        @else
+                        {{ Auth::user()->name }} @endguest
+                    </a>
+                    <ul class="dropdown-menu ">
                         @guest
-                        <li> <a class="nav-link {{ Request::routeIs('dangnhap') ? 'activemenu' : '' }}"
-                                href="{{ route('dangnhap') }}">Đăng nhập</a></li>
-                        <li> <a class="nav-link {{ Request::routeIs('dangky') ? 'activemenu' : '' }}"
-                                href="{{ route('dangky') }}">Đăng ký</a></li>
-                                @else
-                                @if (Auth::user()->role == 1)
+                            <li> <a class="nav-link text-dark {{ Request::routeIs('dangnhap') ? 'activemenu' : '' }}"
+                                    href="{{ route('dangnhap') }}">Đăng nhập</a></li>
+                            <li> <a class="nav-link text-dark {{ Request::routeIs('dangky') ? 'activemenu' : '' }}"
+                                    href="{{ route('dangky') }}">Đăng ký</a></li>
+                        @else
+                            @if (Auth::user()->role == 1)
                                 <li>
-                                        <a class="dropdown-item" href="{{ route('admin.index') }}">
-                                            {{ __('Quản lý trang') }}
-                                        </a>
-                                    </li>
-                                    @else
-                                    <li>
-                                        <a class="dropdown-item" href="{{ route('user.index') }}">
-                                            {{ __('Quản lý tài khoản') }}
-                                        </a>
-                                    </li>
-                                    @endif
+                                    <a class="dropdown-item text-dark" href="{{ route('admin.index') }}">
+                                        {{ __('Quản lý trang') }}
+                                    </a>
+                                </li>
+                            @else
                                 <li>
-                                <a class="dropdown-item" href="{{ route('dangxuat') }}">
+                                    <a class="dropdown-item text-dark" href="{{ route('user.index') }}">
+                                        {{ __('Quản lý tài khoản') }}
+                                    </a>
+                                </li>
+                            @endif
+                            <li>
+                                <a class="dropdown-item text-dark" href="{{ route('dangxuat') }}">
                                     {{ __('Đăng xuất') }}
                                 </a>
                             </li>
-                                @endguest
+                        @endguest
                     </ul>
                 </div>
-                <button class="navbar-toggler justify-content-end" type="button" data-bs-toggle="collapse"
+
+                <a class="d-block d-md-none d-flex mx-1 " style="text-decoration: none"
+                    href="{{ route('cart.index') }}">
+                    <i class="fa fa-shopping-cart   py-1" style="font-size:24px;color:#000;"></i>
+                    <p class="text-light " style="font-weight:700 ">({{ $sl }})</p>
+                </a>
+
+                <button class=" mx-1 navbar-toggler justify-content-end" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
