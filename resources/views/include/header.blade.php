@@ -1,4 +1,4 @@
-<header>
+<header class="fixed-md-top">
     <div class="bg-success">
         <div class="container">
             <div class="row align-items-center text-light fw-bold">
@@ -94,10 +94,14 @@
             <ul class="nav nav-fill navbar-expand-md navbar-light">
                 <a href="{{ route('index') }}" class="navbar-brand d-block d-md-none"><img
                         src="{{ asset('img/logo.png') }}" alt="logo" class="icon-header"></a>
+                <a class="d-block nav-link d-md-none d-flex" href="{{ route('cart.index') }}">
+                    <i class="fa fa-shopping-cart py-1 " style="font-size:24px;"></i>
+                    <p class="text-danger ">({{ $sl }})</p>
+                </a>
                 <div class="dropdown d-block d-md-none">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                         aria-expanded="false">@guest Tài khoản @else {{ Auth::user()->name }} @endguest</a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu bg-successs">
                         @guest
                         <li> <a class="nav-link {{ Request::routeIs('dangnhap') ? 'activemenu' : '' }}"
                                 href="{{ route('dangnhap') }}">Đăng nhập</a></li>
@@ -125,10 +129,6 @@
                                 @endguest
                     </ul>
                 </div>
-                <a class="d-block nav-link d-md-none d-flex" href="{{ route('cart.index') }}">
-                    <i class="fa fa-shopping-cart py-1 " style="font-size:24px;"></i>
-                    <p class="text-danger ">({{ $sl }})</p>
-                </a>
                 <button class="navbar-toggler justify-content-end" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
