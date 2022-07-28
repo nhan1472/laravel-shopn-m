@@ -6,6 +6,7 @@
     @media only screen and (max-width: 321px) {
         .nav-link{
             font-size: 10px;
+            
         }
     }
 </style>

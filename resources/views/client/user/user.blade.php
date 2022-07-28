@@ -153,7 +153,7 @@
                 </div>
                 <br>
                 <br>
-                <div class="col-12">
+                <div class="col-12 my-5">
                     <h1 class="text-center">Thông kê</h1>
                     @if(Auth::user()->role==0)
                     <table class="table">
