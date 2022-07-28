@@ -121,7 +121,7 @@ class CartController extends Controller
         }
         $startTime = date("Y-m-d H:i:s");
         DB::insert('INSERT INTO `hoadon`(`idkh`,`tongsl`, `tong`, `ngaymua`, `tinhtrang`) VALUES(?,?,?,?,?)', 
-        [Auth::user()->id,$sl,$total,$startTime,0]);
+        [$request->id,$sl,$total,$startTime,0]);
         $id=DB::select('SELECT `id` FROM `hoadon` ORDER BY `id` DESC LIMIT 1');
         foreach ($cart as $key => $value) {
             $idsp=$value['id'];

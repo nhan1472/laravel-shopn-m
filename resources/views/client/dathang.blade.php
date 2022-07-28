@@ -266,7 +266,7 @@
                                 @csrf
 
                                 <table ng-if="!table" class="table">
-
+                                        
                                     <tbody>
                                         <tr>
                                             <td>Tên:</td>
@@ -349,6 +349,7 @@
                             @endphp
                             @if (session('cart'))
                                 <div class="d-none d-md-block">
+                                    
                                     <table class="table"
                                         style="background-color: #fff;min-height: 300px;
                                          border: solid 1px #e8e8e8;box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);">
@@ -475,6 +476,7 @@
                         @endif
                         <form action="{{ route('cart.addhoadon') }}" ng-submit="an()" method="post">
                             @csrf
+                            <input type="hidden" name="id" value="{{ Auth::user()->id }}">
                             <div class="cart_buttons mb-3">
                                 <a href="{{ route('cart.index') }}">
                                     <button type="button" class="button cart_button_clear">quay về
