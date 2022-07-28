@@ -386,9 +386,11 @@
                                     <div class="order_total_amount">{{ number_format($total) }}Đ</div>
                                 </div>
                             </div>
+                            @if ($sl > 0)
                             <div class="row d-block d-md-none mb-2"  style="background-color:#fff; border: solid 1px #e8e8e8;
                             box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1); ">
                                     <div class="col-10 ps-5 p2-4">Tổng tiền {{ number_format($total) }}Đ</div>
+                                    @endif
                             </div>
                             <div class="cart_buttons mb-3 d-none d-md-block"> <a
                                     href="{{ route('sanpham.index') }}"><button type="button"
@@ -414,7 +416,7 @@
                                         id="thanhtoan">Đặt hàng
                                     </button>
                                 @else
-                                    <button type="button" class="btn btn-outline-primary btn-sm col-6 "
+                                    <button type="button" class="btn btn-outline-secondary btn-sm col-6 "
                                         disabled="disabled">Đặt
                                         hàng
                                     </button>
