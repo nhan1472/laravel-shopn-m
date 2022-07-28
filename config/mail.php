@@ -32,19 +32,27 @@ return [
     |            "postmark", "log", "array", "failover"
     |
     */
-
+    // 'smtp' => [
+    //     'transport' => 'smtp',
+    //     'host' => 'smtp.gmail.com',
+    //     'port' => 587,
+    //     'encryption' => 'tls',
+    //     'username' => 'ngonhan977@gmail.com',
+    //     'password' => 'wipgccwmxeanayqf',
+    //     'timeout' => null,
+    //     'local_domain' => env('MAIL_EHLO_DOMAIN'),
+    // ],
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'host' => 'smtp.gmail.com',
-            'port' => 587,
-            'encryption' => 'tls',
-            'username' => 'ngonhan977@gmail.com',
-            'password' => 'wipgccwmxeanayqf',
+            'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+            'port' => env('MAIL_PORT', 587),
+            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+            'username' => env('MAIL_USERNAME'),
+            'password' => env('MAIL_PASSWORD'),
             'timeout' => null,
             'local_domain' => env('MAIL_EHLO_DOMAIN'),
         ],
-
         'ses' => [
             'transport' => 'ses',
         ],
