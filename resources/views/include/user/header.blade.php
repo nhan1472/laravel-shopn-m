@@ -84,7 +84,12 @@
                   <li><a class="dropdown-item" href="{{ route('user.index') }}">Tài khoản</a></li>
                   <li><a class="dropdown-item" href="{{ route('user.updatepass') }}">Thây đỗi mật khẩu</a></li>
                   <li><hr class="dropdown-divider"></li>
+                  @if (Auth::user()->role==0)
                   <li><a class="dropdown-item" href="{{ route('user.giohang') }}">kiểm tra hóa đơn</a></li>
+                  @endif
+                  @if (Auth::user()->role==2)
+                  <li><a class="dropdown-item" href="{{ route('user.hoadon.index') }}">Quản lý đơn hàng</a></li>
+                  @endif
                 </ul>
             </li>
             <li class="nav-item">
