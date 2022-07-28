@@ -143,12 +143,16 @@
                                     @endif
                                 </tbody>
                             </table>
+                            <br>
                             <a class="btn btn-primary" ng-if="!capnhat" ng-click="nhan()">Cập nhật thông tin</a>
                             <a class="btn btn-secondary" ng-if="capnhat" ng-click="nhan()">Quay lại</a>
                             <button class="btn btn-danger" ng-if="capnhat" type="submit">Thay đỗi</button>
+     
                         </form>
                     </div>
                 </div>
+                <br>
+                <br>
                 <div class="col-12">
                     <h1 class="text-center">Thông kê</h1>
                     @if(Auth::user()->role==0)

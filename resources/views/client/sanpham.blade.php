@@ -47,15 +47,21 @@
         }
 
         .checked {
-  color: orange;
-}
+            color: orange;
+        }
+
+        @media only screen and (max-width: 800px) {
+            .chu {
+                font-size: 14px;
+            }
+        }
     </style>
 @endsection
 @section('content')
     <div class="container">
         <div ng-controller='spcontroller'>
             <div class="row mt-2">
-                <div class="col-3">
+                <div class="col-md-4 col-12 col-lg-3">
                     <h3 class="text-center">Bộ lọc sản phẩm</h3>
                     <hr>
                     <div class="form-check">
@@ -96,7 +102,7 @@
                     @{{ giamax }}
                     {{-- @{{ sizect }} --}}
                 </div>
-                <div class="col-9">
+                <div class="col-12 col-md-8 col-lg-9">
                     <div ng-if="tt" class="alert alert-@{{ type }}  alert-dismissible">
                         @{{ thongbao }}
                         <button type="button" class="btn-close" ng-click="kttt()" aria-label="Close"></button>
@@ -108,11 +114,11 @@
                         </div>
                     @endif
                     <div class="row">
-                        <div class="col-10">
+                        <div class="col-12 col-md-8 col-lg-9">
                             <input type="text" ng-model="seach" ng-change="ktdm()" class="form-control"
                                 placeholder="nhập tên sản phẩm cần tìm......">
                         </div>
-                        <div class="col-2">
+                        <div class="col-md-4 col-lg-3    d-none d-md-block">
                             <select ng-model="sapxep" class="form-control">
                                 <option ng-repeat="item in loaisx" value="@{{ item.value }}">@{{ item.name }}
                                 </option>
@@ -123,19 +129,138 @@
                         <div class="row" style="margin-bottom: 300px;margin-top: 100px">
                             <div class="col-4"></div>
                             <div class="col-4">
-                                <img src="{{ asset('img/rong.png') }}" alt="không có sản phẩm">
+                                <img src="{{ asset('img/rong.png') }}" width="50%" alt="không có sản phẩm">
                                 <h2 class="text-center text-danger">@{{ thongbao1 }}</h2>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-
-                        <div class="col-4 mt-3"
+                        <div class="col-md-4 d-none d-md-none d-lg-block mt-3"
                             ng-repeat="items in listItems  |seachname :seach  |locdm: listLoai |locsize :listSize:sizect |locyt :checkyt|locsale :checksale|locgia :giamin :giamax |  orderBy:sapxep  |limitTo  :page:start">
-                            <div class="card" style="width: 18rem;">
+                            <div class="card" style="width: 100%;">
                                 <a href="/sanpham/@{{ items.id }}">
                                     <img src="@{{ items.img }}" class="card-img-top image" style="max-height:300px"
                                         alt="@{{ items.ten }}">
+                                    <div class="card-body">
+
+                                        <div class="yeuthich">
+                                            <div>
+                                                <img src="{{ asset('img/yeuthich.png') }}" ng-if="!yt[items.id]"
+                                                    ng-click="addyt(items.id,$event)" height="35px" width="60px"
+                                                    alt="yeuthich">
+                                                <img src="{{ asset('img/yeuthich1.png') }}" ng-if="yt[items.id]"
+                                                    ng-click="addyt(items.id,$event)" height="45px" width="60px"
+                                                    alt="yeuthich">
+                                            </div>
+                                        </div>
+
+                                        <div class="giamgia">
+                                            <div ng-if="items.giamgia>0">
+                                                <a class="btn btn-danger">@{{ items.giamgia }}%</a>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">Lược xem :@{{ items.luotxem }}</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div style="float: left; margin-left:5px; "
+                                                    ng-repeat="row in sao[items.id]">
+                                                    <span ng-if="row.gt" class="fa fa-star checked"></span>
+                                                    <span ng-if="!row.gt" class="fa fa-star "></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <h5 class="card-title text-center chu">@{{ items.ten }}
+                                            || Size:<a style="color:black;text-decoration: none;"
+                                                ng-repeat="item in items.size">@{{ item }},</a>
+                                            <div ng-if="items.giamgia>0" class="text-center text-danger">
+                                                <p class="card-text chu">
+                                                    <span
+                                                        style="text-decoration:line-through; ">@{{ items.gia | number }}</span>
+                                                    ||
+                                                    @{{ items.gia * (100 - items.giamgia) / 100 | number }}đ
+                                                </p>
+                                            </div>
+
+                                            <div ng-if="items.giamgia==0">
+                                                <p class="card-text text-danger text-center">
+
+                                                    @{{ items.gia | number }}đ
+                                                </p>
+                                            </div>
+
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6 d-none d-md-block d-lg-none     mt-3"
+                            ng-repeat="items in listItems  |seachname :seach  |locdm: listLoai |locsize :listSize:sizect |locyt :checkyt|locsale :checksale|locgia :giamin :giamax |  orderBy:sapxep  |limitTo  :page:start">
+                            <div class="card" style="width: 100%;">
+                                <a href="/sanpham/@{{ items.id }}">
+                                    <img src="@{{ items.img }}" class="card-img-top image"
+                                        style="max-height:300px" alt="@{{ items.ten }}">
+                                    <div class="card-body">
+
+                                        <div class="yeuthich">
+                                            <div>
+                                                <img src="{{ asset('img/yeuthich.png') }}" ng-if="!yt[items.id]"
+                                                    ng-click="addyt(items.id,$event)" height="35px" width="60px"
+                                                    alt="yeuthich">
+                                                <img src="{{ asset('img/yeuthich1.png') }}" ng-if="yt[items.id]"
+                                                    ng-click="addyt(items.id,$event)" height="45px" width="60px"
+                                                    alt="yeuthich">
+                                            </div>
+                                        </div>
+
+                                        <div class="giamgia">
+                                            <div ng-if="items.giamgia>0">
+                                                <a class="btn btn-danger">@{{ items.giamgia }}%</a>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">Lược xem :@{{ items.luotxem }}</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div style="float: left; margin-left:5px; "
+                                                    ng-repeat="row in sao[items.id]">
+                                                    <span ng-if="row.gt" class="fa fa-star checked"></span>
+                                                    <span ng-if="!row.gt" class="fa fa-star "></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <h5 class="card-title text-center chu">@{{ items.ten }}
+                                            || Size:<a style="color:black;text-decoration: none;"
+                                                ng-repeat="item in items.size">@{{ item }},</a>
+                                            <div ng-if="items.giamgia>0" class="text-center text-danger">
+                                                <p class="card-text chu">
+                                                    <span
+                                                        style="text-decoration:line-through; ">@{{ items.gia | number }}</span>
+                                                    ||
+                                                    @{{ items.gia * (100 - items.giamgia) / 100 | number }}đ
+                                                </p>
+                                            </div>
+
+                                            <div ng-if="items.giamgia==0">
+                                                <p class="card-text text-danger text-center">
+
+                                                    @{{ items.gia | number }}đ
+                                                </p>
+                                            </div>
+
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-12 d-block d-md-none mt-3"
+                            ng-repeat="items in listItems  |seachname :seach  |locdm: listLoai |locsize :listSize:sizect |locyt :checkyt|locsale :checksale|locgia :giamin :giamax |  orderBy:sapxep  |limitTo  :page:start">
+                            <div class="card" style="width: 100%;">
+                                <a href="/sanpham/@{{ items.id }}">
+                                    <img src="@{{ items.img }}" class="card-img-top image"
+                                        style="max-height:300px" alt="@{{ items.ten }}">
                                     <div class="card-body">
 
                                         <div class="yeuthich">
@@ -160,35 +285,37 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-12">
-                                                <div style="float: left; margin-left:5px; " ng-repeat="row in sao[items.id]">
-                                                    <span ng-if="row.gt" class="fa fa-star checked" ></span>
+                                                <div style="float: left; margin-left:5px; "
+                                                    ng-repeat="row in sao[items.id]">
+                                                    <span ng-if="row.gt" class="fa fa-star checked"></span>
                                                     <span ng-if="!row.gt" class="fa fa-star "></span>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <h5 class="card-title text-center">@{{ items.ten }}  
-                                           || Size:<a style="color:black;text-decoration: none;" ng-repeat="item in items.size">@{{item}},</a>
-                                        <div ng-if="items.giamgia>0" class="text-center text-danger">
-                                            <p class="card-text ">
-                                                <span style="text-decoration:line-through; ">@{{ items.gia | number }}</span>
-                                                ||
-                                                @{{ items.gia * (100 - items.giamgia) / 100 | number }}đ
-                                            </p>
-                                        </div>
+                                        <h5 class="card-title text-center">@{{ items.ten }}
+                                            || Size:<a style="color:black;text-decoration: none;"
+                                                ng-repeat="item in items.size">@{{ item }},</a>
+                                            <div ng-if="items.giamgia>0" class="text-center text-danger">
+                                                <p class="card-text ">
+                                                    <span
+                                                        style="text-decoration:line-through; ">@{{ items.gia | number }}</span>
+                                                    ||
+                                                    @{{ items.gia * (100 - items.giamgia) / 100 | number }}đ
+                                                </p>
+                                            </div>
 
-                                        <div ng-if="items.giamgia==0">
-                                            <p class="card-text text-danger text-center">
+                                            <div ng-if="items.giamgia==0">
+                                                <p class="card-text text-danger text-center">
 
-                                                @{{ items.gia | number }}đ
-                                            </p>
-                                        </div>
+                                                    @{{ items.gia | number }}đ
+                                                </p>
+                                            </div>
 
                                     </div>
                                 </a>
                             </div>
                         </div>
-
                     </div>
                     <nav aria-label="Page navigation example" class="mt-2">
                         <ul class="pagination">
@@ -345,13 +472,13 @@
                             'danhgia': 0,
                         @endif
                         'maloai': {{ $item->maloai }},
-                        'size':[
-                        @foreach ($size as $row)
-                        @php
-                        $sizect1 = DB::select('SELECT * FROM `size` WHERE `id`=?', [$row->idsize]);
-                        @endphp
-                        '{{$sizect1[0]->size}}',
-                        @endforeach
+                        'size': [
+                            @foreach ($size as $row)
+                                @php
+                                    $sizect1 = DB::select('SELECT * FROM `size` WHERE `id`=?', [$row->idsize]);
+                                @endphp
+                                    '{{ $sizect1[0]->size }}',
+                            @endforeach
                         ],
                     },
                 @endforeach
@@ -372,23 +499,29 @@
                 }
             })
             $rootScope.listLoai = [
-                @foreach ($listLoai as $item) {
+                @foreach ($listLoai as $item)
+                    {
                         'id': {{ $item->id }},
                         'name': '{{ $item->name }}',
-                    }, @endforeach
+                    },
+                @endforeach
             ]
             $rootScope.listSize = [
-                @foreach ($listSize as $item) {
+                @foreach ($listSize as $item)
+                    {
                         'id': {{ $item->id }},
                         'size': '{{ $item->size }}',
-                    }, @endforeach
+                    },
+                @endforeach
             ]
             $rootScope.sizect = [
-                @foreach ($sizect as $item) {
+                @foreach ($sizect as $item)
+                    {
                         'id': {{ $item->id }},
                         'idsp': {{ $item->idsp }},
                         'idsize': {{ $item->idsize }},
-                    }, @endforeach
+                    },
+                @endforeach
             ]
             $rootScope.seach = ''
             $rootScope.sapxep = ''

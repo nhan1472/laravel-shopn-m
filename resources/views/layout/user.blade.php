@@ -15,8 +15,8 @@
 
 <body ng-app="myapp">
     <div class="row">
-        <div class="col-3  bg-success">@include('include.user.header')</div>
-        <div class="col-9">
+        <div class="col-12 col-md-3  bg-success">@include('include.user.header')</div>
+        <div class="col-12 col-md-9">
             <div class="load" style="margin: 15% 25% " >
                 <div class="d-flex justify-content-center"  >
                     <div class="spinner-border"   style="width: 3rem; height: 3rem;"role="status">

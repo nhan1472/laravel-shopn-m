@@ -141,7 +141,7 @@
 
         .cart_buttons {
             margin-top: 60px;
-            text-align: right
+            text-align: center
         }
 
         .cart_button_clear {
@@ -178,9 +178,10 @@
             cursor: pointer;
             vertical-align: top
         }
-        .cart_button_checkout:disabled{
+
+        .cart_button_checkout:disabled {
             background: #dddddd;
-            cursor:no-drop ;
+            cursor: no-drop;
         }
     </style>
 @endsection
@@ -190,178 +191,264 @@
             <div class="row">
                 @php $sl = 0 @endphp
                 @if (session('cart'))
-                @foreach (session('cart') as $id => $items)
-                @php $sl +=  $items['sl'] @endphp
-                @endforeach
+                    @foreach (session('cart') as $id => $items)
+                        @php $sl +=  $items['sl'] @endphp
+                    @endforeach
                 @endif
-                <div class="col-lg-10 offset-lg-1">
+                <div class="col-md-1 col-1"></div>
+                <div class="col-md-10   col-10">
                     <div class="cart_container">
                         @if (session('success'))
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                {{ session('success') }} 
-                                @if(session('success1'))
-                                <a href="{{ route('user.giohang') }}"> Xem hóa đơn</a>
+                                {{ session('success') }}
+                                @if (session('success1'))
+                                    <a href="{{ route('user.giohang') }}"> Xem hóa đơn</a>
                                 @endif
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         @endif
-                        <div class="cart_title">Giỏ hành của bạn<small> ({{ $sl }} sản phẩm trông giỏ) </small>
+                        <div class="cart_title  d-none d-md-block">Giỏ hàng của bạn<small> ({{ $sl }} sản phẩm
+                                trông
+                                giỏ) </small>
+                        </div>
+                        <div class="cart_title text-center  d-block d-md-none">Giỏ hàng của bạn<small> ({{ $sl }}
+                                sản phẩm trông giỏ) </small>
                         </div>
                         <div class="cart_items">
-                            <ul class="cart_list">
-                                <li class="cart_item clearfix">
-                                    <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
-                                        <div class="cart_item_name cart_info_col">
-                                            <div class="cart_item_title">img</div>
-                                        </div>
-                                        <div class="cart_item_name cart_info_col">
-                                            <div class="cart_item_title">Tên sản phẩm</div>
-                                        </div>
-                                        <div class="cart_item_color cart_info_col">
-                                            <div class="cart_item_title">Size</div>
-                                        </div>
-                                        <div class="cart_item_quantity cart_info_col">
-                                            <div class="cart_item_title">Số lượng</div>
-                                        </div>
-                                        <div class="cart_item_price cart_info_col">
-                                            <div class="cart_item_title">giá</div>
-                                            <div class="cart_item_text">
-                                            </div>
-                                        </div>
-                                        <div class="cart_item_total cart_info_col">
-                                            <div class="cart_item_title">Thành tiền</div>
-                                        </div>
-                                        <div class="cart_item_total cart_info_col">
-                                            <div class="cart_item_title"></div>
-                                        </div>
-                                    </div>
-                                </li>
-                                @php $total = 0 @endphp
-                                @if (session('cart'))
-                                    @foreach (session('cart') as $id => $items)
-                                        <li class="cart_item clearfix">
-                                            <div
-                                                class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
-                                                <div class="cart_item_name cart_info_col">
-                                                    <div class="cart_item_text"><img src="{{ $items['img'] }}"
-                                                            style="max-height: 100px;width: 100px;" alt=""></div>
-                                                </div>
-                                                <div class="cart_item_name cart_info_col">
-                                                    <div class="cart_item_text">{{ $items['ten'] }}</div>
-                                                </div>
-                                                <div class="cart_item_color cart_info_col">
-                                                    <div class="cart_item_text">
-                                                        {{$items['size'] }}  </div>
-                                                </div>
-                                                <div class="cart_item_quantity cart_info_col">
-                                                    <div class="cart_item_text d-flex">
+                            @php
+                                $total = 0;
+                            @endphp
+                            @if (session('cart'))
+                                <div class="d-none d-md-block">
+                                    <table class="table"
+                                        style="background-color: #fff;min-height: 300px;
+                                         border: solid 1px #e8e8e8;box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);">
+                                        <thead>
+                                            <tr style="font-size:24px ">
+                                                <th>STT</th>
+                                                <th>ảnh</th>
+                                                <th>Tên sản phẩm</th>
+                                                <th>Size</th>
+                                                <th>Số lượng</th>
+                                                <th>Giá</th>
+                                                <th>Thành tiền</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (session('cart') as $id => $items)
+                                                <tr class="fw h4 align-items-center">
+                                                    <td>{{ $loop->index + 1 }}</td>
+                                                    <td><img src="{{ $items['img'] }}"
+                                                            style="max-height: 75px;width: 100px;"
+                                                            alt="{{ $items['ten'] }}"></td>
+                                                    <td>{{ $items['ten'] }}</td>
+                                                    <td>{{ $items['size'] }}</td>
+                                                    <td class="d-flex">
                                                         @if ($items['sl'] > 1)
-                                                            <form action="{{ route('cart.giam') }}" method="post"
-                                                                id="formtang">
-                                                                <input type="hidden" name="id" value="{{ $id }}">
+                                                            <form action="{{ route('cart.giam') }} " method="post">
                                                                 @csrf
-                                                                <button type="submit"
-                                                                    class="btn btn-outline-info">-</button>
+                                                                <input type="hidden" name="id"
+                                                                    value="{{ $items['id'] }}">
+                                                                <button type="submit" class="btn btn-primary">-</button>
                                                             </form>
                                                         @endif
                                                         {{ $items['sl'] }}
-                                                        @if ($items['sl'] < 25)
-                                                        <form action="{{ route('cart.tang') }}" method="post"
-                                                            id="formtang">
-                                                            <input type="hidden" name="id" value="{{ $id }}">
-                                                            @csrf
-                                                            <button type="submit" class="btn btn-outline-info">+</button>
-                                                        </form>
+                                                        @if ($items['sl'] >= 1)
+                                                            <form action="{{ route('cart.tang') }} " method="post">
+                                                                @csrf
+                                                                <input type="hidden" name="id"
+                                                                    value="{{ $items['id'] }}">
+                                                                <button type="submit" class="btn btn-primary">+</button>
+                                                            </form>
                                                         @endif
-                                                    </div>
-                                                </div>
-                                                <div class="cart_item_price cart_info_col">
-                                                    <div class="cart_item_text">
-                                                        <div class="cart_item_text"> {{ number_format($items['gia']*(100-$items['giamgia'])/100) }}Đ
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="cart_item_total cart_info_col">
-                                                    <div class="cart_item_text">
-                                                        {{ number_format($items['gia']*(100-$items['giamgia'])/100 * $items['sl']) }}Đ</div>
-                                                </div>
-                                                <div class="cart_item_total cart_info_col">
-                                                    <div class="cart_item_title"></div>
-                                                    <form action="{{ route('cart.remove') }}" method="post" id="formxoa">
-                                                        <input type="hidden" name="id" value="{{ $id }}">
-                                                        @csrf
-                                                        <div class="cart_item_text"> <button type="submit"
-                                                                class="btn btn-outline-danger xoa" >X</button></div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        @php $total += $items['gia']*(100-$items['giamgia'])/100 * $items['sl'] @endphp
-                                   
-                                    @endforeach
-                            </ul>
-                        </div>
-                    @else
-                        <li class="cart_item clearfix">
-                            <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
+                                                    </td>
+                                                    <td> {{ number_format(($items['gia'] * (100 - $items['giamgia'])) / 100) }}Đ
+                                                    </td>
+                                                    <td>{{ number_format((($items['gia'] * (100 - $items['giamgia'])) / 100) * $items['sl']) }}Đ
+                                                    </td>
+                                                    <td>
+                                                        <form action="{{ route('cart.remove') }} " method="post">
+                                                            @csrf
+                                                            <input type="hidden" name="id"
+                                                                value="{{ $items['id'] }}">
+                                                            <button type="submit" class="btn btn-danger xoa">X</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                                @php $total += $items['gia']*(100-$items['giamgia'])/100 * $items['sl'] @endphp
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="d-block d-md-none">
+                                    <table class="table"
+                                        style="background-color: #fff;min-height: 300px;
+                                         border: solid 1px #e8e8e8;box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);">
+                                        <tbody class="fw h6 align-items-center">
+                                            @foreach (session('cart') as $id => $items)
+                                                <tr class="h4">
+                                                    <td>TênSP</td>
+                                                    <td>{{ $items['ten'] }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Ảnh</td>
+                                                    <td>
+                                                        <img src="{{ $items['img'] }}"
+                                                            style="max-height: 35px;width: 50px;"
+                                                            alt="{{ $items['ten'] }}">
+                                                    </td>
+                                                </tr>
 
-                                <div class="cart_item_quantity cart_info_col" style="margin: auto">
-                                    <img src="{{ asset('img/rong.png') }}" alt="không có sản phẩm">
-                                    <h2 class="text-danger">Không có sản phẩm trong giỏ</h2>
+                                                <tr>
+                                                    <td>Size</td>
+                                                    <td>{{ $items['size'] }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>số lượng</td>
+                                                    <td class="d-flex">
+                                                        @if ($items['sl'] > 1)
+                                                            <form action="{{ route('cart.giam') }} " method="post">
+                                                                @csrf
+                                                                <input type="hidden" name="id"
+                                                                    value="{{ $items['id'] }}">
+                                                                <button type="submit" class="btn btn-primary">-</button>
+                                                            </form>
+                                                        @endif
+                                                        {{ $items['sl'] }}
+                                                        @if ($items['sl'] >= 1)
+                                                            <form action="{{ route('cart.tang') }} " method="post">
+                                                                @csrf
+                                                                <input type="hidden" name="id"
+                                                                    value="{{ $items['id'] }}">
+                                                                <button type="submit" class="btn btn-primary">+</button>
+                                                            </form>
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>giá</td>
+                                                    <td> {{ number_format(($items['gia'] * (100 - $items['giamgia'])) / 100) }}Đ
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>thành tiền</td>
+                                                    <td>{{ number_format((($items['gia'] * (100 - $items['giamgia'])) / 100) * $items['sl']) }}Đ
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td>
+                                                        <form action="{{ route('cart.remove') }} " method="post">
+                                                            @csrf
+                                                            <input type="hidden" name="id"
+                                                                value="{{ $items['id'] }}">
+                                                            <button type="submit" class="btn btn-danger xoa">X</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <hr size="4 my-2">
+                                                    </td>
+                                                </tr>
+                                                @php $total += $items['gia']*(100-$items['giamgia'])/100 * $items['sl'] @endphp
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            @else
+                                <li class="cart_item clearfix d-none d-md-block"
+                                    style="background-color:#fff; border: solid 1px #e8e8e8;
+                                 box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1); ">
+                                    <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
+
+                                        <div class="cart_item_quantity cart_info_col" style="margin: auto">
+                                            <img src="{{ asset('img/rong.png') }}" class="ms-5 my-5"
+                                                alt="không có sản phẩm">
+                                            <h2 class="text-danger mb-2">Không có sản phẩm trong giỏ</h2>
+                                        </div>
+                                    </div>
+                                </li>
+                                <div class="row d-block d-md-none"
+                                    style="background-color:#fff;min-height:200px;border: solid 1px #e8e8e8;
+                                box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);width:100%;margin: auto;">
+                                    <div class="col-12">
+                                        <img src="{{ asset('img/rong.png') }}" class="mt-3 mx-5" style="max-height: 100px;"
+                                            alt="không có sản phẩm">
+                                        <h2 class="text-danger text-center">Không có sản phẩm trong giỏ</h2>
+                                    </div>
+                                </div>
+                            @endif
+                            <div class="order_total d-none d-md-block">
+                                <div class="order_total_content text-md-right">
+                                    <div class="order_total_title">Tổng tiền:</div>
+                                    <div class="order_total_amount">{{ number_format($total) }}Đ</div>
                                 </div>
                             </div>
-                        </li>
-                        @endif
-                        <div class="order_total">
-                            <div class="order_total_content text-md-right">
-                                <div class="order_total_title">Tổng tiền:</div>
-                                <div class="order_total_amount">{{ number_format($total) }}Đ</div>
+                            <div class="row d-block d-md-none mb-2"  style="background-color:#fff; border: solid 1px #e8e8e8;
+                            box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1); ">
+                                    <div class="col-10 ps-5 p2-4">Tổng tiền {{ number_format($total) }}Đ</div>
                             </div>
-                        </div>
-
-
-                        <div class="cart_buttons mb-3"> <a href="{{ route('sanpham.index') }}"><button type="button"
-                                    class="button cart_button_clear">quay về
-                                </button></a>
-                                @if($sl >0)
-                            <button type="button" class="button cart_button_checkout" onclick="kt()" id="thanhtoan">Đặt hàng
-                                </button>
+                            <div class="cart_buttons mb-3 d-none d-md-block"> <a
+                                    href="{{ route('sanpham.index') }}"><button type="button"
+                                        class="button cart_button_clear">quay về
+                                    </button></a>
+                                @if ($sl > 0)
+                                    <button type="button" class="button cart_button_checkout" onclick="kt()"
+                                        id="thanhtoan">Đặt hàng
+                                    </button>
                                 @else
-                                <button type="button" class="button cart_button_checkout " disabled="disabled">Đặt hàng
-                                </button>
+                                    <button type="button" class="button cart_button_checkout " disabled="disabled">Đặt
+                                        hàng
+                                    </button>
                                 @endif
+                            </div>
+                            <div class="row mb-3 d-block d-md-none">
+
+                                <a href="{{ route('sanpham.index') }}" class="col-6"><button type="button"
+                                        class="btn btn-outline-secondary  btn-sm  ">quay về
+                                    </button></a>
+                                @if ($sl > 0)
+                                    <button type="button" class="btn btn-outline-primary btn-sm col-6 " onclick="kt()"
+                                        id="thanhtoan">Đặt hàng
+                                    </button>
+                                @else
+                                    <button type="button" class="btn btn-outline-primary btn-sm col-6 "
+                                        disabled="disabled">Đặt
+                                        hàng
+                                    </button>
+                                @endif
+                            </div>
+                            {{-- {{ Auth::user()->email }} --}}
                         </div>
-                       
-                        {{-- {{ Auth::user()->email }} --}}
                     </div>
                 </div>
             </div>
-        </div>=
-    </div>
-@endsection
-@section('js')
-    <script>
-        for(i=0;i<document.getElementsByClassName("xoa").length;i++)
-        {
-            document.getElementsByClassName("xoa")[i].addEventListener("click", function(event) {
-            if (!confirm("bạn có muốn xóa sản phẩm này không")) {
-                event.preventDefault()
+        </div>
+    @endsection
+    @section('js')
+        <script>
+            for (i = 0; i < document.getElementsByClassName("xoa").length; i++) {
+                document.getElementsByClassName("xoa")[i].addEventListener("click", function(event) {
+                    if (!confirm("bạn có muốn xóa sản phẩm này không")) {
+                        event.preventDefault()
+                    }
+                });
             }
-        });
-        }
-        
-        @guest
-        function kt() {
-            if (confirm("bạn Chưa đăng nhập \n đăng nhập để thanh toán")) {
-                window.location="{{ route('dangnhap') }}";
-            }
-            
-            }
-        @else
+
+            @guest
+
             function kt() {
-                  window.location=" {{ route('cart.dathang') }}"
+                if (confirm("bạn Chưa đăng nhập \n đăng nhập để thanh toán")) {
+                    window.location = "{{ route('dangnhap') }}";
+                }
+
             }
-        @endguest
-    </script>
-@endsection
+            @else
+                function kt() {
+                    window.location = " {{ route('cart.dathang') }}"
+                }
+            @endguest
+        </script>
+    @endsection

@@ -1,4 +1,4 @@
-<header class="fixed-md-top">
+<header class="">
     <div class="bg-success">
         <div class="container">
             <div class="row align-items-center text-light fw-bold">
@@ -41,7 +41,8 @@
             </div>
         </div>
     </div>
-    <div class="container">
+    <div class="bg-light">
+    <div class="container ">
         <div class="row align-items-center">
             <div class="col-2 d-none d-md-block">
                 <a href="{{ route('index') }}"><img src="{{ asset('img/logo.png') }}" alt="logo"
@@ -89,6 +90,7 @@
             </div>
         </div>
     </div>
+</div>
     <div class="bg-success">
         <div class="container">
             <ul class=" nav nav-fill align-items-center justify-content-center navbar-expand-md navbar-light">
@@ -136,7 +138,7 @@
                     <p class="text-light " style="font-weight:700 ">({{ $sl }})</p>
                 </a>
 
-                <button class=" mx-1 navbar-toggler justify-content-end" type="button" data-bs-toggle="collapse"
+                <button class=" navbar-toggler justify-content-end" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>

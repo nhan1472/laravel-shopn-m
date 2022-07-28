@@ -3,10 +3,14 @@
         background-color: #0081f1;
         font-weight: 800;
     }
-
+    @media only screen and (max-width: 321px) {
+        .nav-link{
+            font-size: 10px;
+        }
+    }
 </style>
 
-<header class="bg-success" style="height: 50em">
+<header class="bg-success d-none d-md-block" style="height: 50em">
     <ul class="nav flex-column">
         <li class="nav-item mt-5">
             <a class="nav-link " href="{{ route('index') }}">Quay
@@ -66,4 +70,27 @@
             <a class="nav-link" href="{{ route('dangxuat') }}">Đăng xuất</a>
         </li>
     </ul>
+</header>
+<header class="bg-success d-block d-md-none">
+    <div class="container">
+    <div class="row">
+        <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link " href="{{ route('index') }}">Trang Mua hàng</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">chức năng</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="{{ route('user.index') }}">Tài khoản</a></li>
+                  <li><a class="dropdown-item" href="{{ route('user.updatepass') }}">Thây đỗi mật khẩu</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="{{ route('user.giohang') }}">kiểm tra hóa đơn</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('dangxuat') }}">Đăng xuất</a>
+            </li>
+          </ul>
+    </div>
+</div>
 </header>

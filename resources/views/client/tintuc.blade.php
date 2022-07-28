@@ -3,6 +3,7 @@
     {{ $title }}
 @endsection
 @section('css')
+
 @endsection
 @section('content')
     <div class="container mt-5" ng-controller="ttcontroller">
@@ -11,7 +12,7 @@
             <select ng-model="loaitt" class="form-control" ng-change="ktdm()">
                 <option ng-repeat="item in listtt" value="@{{item.value}}">@{{item.name}}</option>
             </select>
-            <div class="col-10" ng-show="kt">
+            <div class="col-12 col-md-8 col-lg-10" ng-show="kt">
                 <div class="row" ng-repeat="item in listTin |loctt :loaitt |limitTo  :page:start">
                     <a href="/tintuc/@{{item.id}}" class="text-dark" style="text-decoration: none;">
                     <div class="row mt-4 py-2 border">
@@ -36,18 +37,24 @@
                     </ul>
                 </nav>
             </div>
-            <div class="col-10" ng-if="!kt">
+            <div class="col-12 col-md-10" ng-if="!kt">
                 <h1 class="text-center">Không có tin tức thuộc danh mục này</h1>
             </div>
-            <div class="col-2">
+            <div class="col-md-4 col-lg-2 d-none d-md-block">
                 <h2>Các sản phẩm mới nhất</h2>
                 <div ng-repeat="item in listItems">
                     <hr class="my-3">
                     <a href="/sanpham/@{{item.id}}">
-                    <div class="card" style="width: 15rem; height: 200px;">
-                        <img src="@{{ item.img }}" height="150px" class="card-img-top" alt="@{{ item.ten }}">
+                    <div class="card d-none d-md-none d-lg-block" style="width: 13rem; height: 125px;">
+                        <img src="@{{ item.img }}" height="90px" class="card-img-top" alt="@{{ item.ten }}">
                         <div class="card-body">
                             <p class="card-text text-center" style="text-decoration: none">@{{ item.ten }}</p>
+                        </div>
+                    </div>
+                    <div class="card justify-content-center d-none d-md-block d-lg-none" style="width: 12rem; height: 100px;">
+                        <img src="@{{ item.img }}" height="70px"  class="card-img-top" alt="@{{ item.ten }}">
+                        <div class="card-body" style="margin-top:-10px "> 
+                            <p class="card-text text-dark text-center" style="text-decoration: none">@{{ item.ten }}</p>
                         </div>
                     </div>
                 </a>
@@ -155,7 +162,7 @@
                    
                 }
             }
-            }
+            }   
             $rootScope.start = 0
             $rootScope.page = 6
             $rootScope.listCount = []

@@ -150,6 +150,19 @@
             margin-bottom: 10px;
             text-align: left;
         }
+        @media only screen and (max-width: 740px) {
+            .content2{
+                font-size: 22px;
+                font-weight: 400;
+                text-align:left; 
+                line-height: 40px;
+            }
+            .title1{
+                font-size: 45px;
+                font-weight: 600;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+        }
     </Style>
 @endsection
 @section('content')
@@ -159,8 +172,9 @@
             <div class="title1 mt-5 ">
                  ShopN$M
             </div>
-            <div class="content2 mb-5">
+            <div class="content2  mb-5">
                 Về chung tôi chuyên cung cấp các sản phẩm thời trang đảm bảo chất lượng. <br>
+                Cam kết : <br>
                     @foreach ($camket as $item)
                         -{{$item->text}} <br>
                     @endforeach
@@ -182,13 +196,13 @@
         <br><br>
     </div>
     <div class="container my-4">
-        <div class="row">
-            <div class="col-6 border-end">
+        <div class="row in">
+            <div class="col-12 col-md-6 border-end">
                 <h1 class="title1 text-dark">Địa chỉ</h1>
                 <h4>Quận 6 thành phố Hồ Chí Minh</h4>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15679.428574286572!2d106.6293227345053!3d10.745491458978103!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752e7cff633fdd%3A0x85ee85db9cb263ba!2zUXXhuq1uIDYsIFRow6BuaCBwaOG7kSBI4buTIENow60gTWluaCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1652620862173!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15679.428574286572!2d106.6293227345053!3d10.745491458978103!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752e7cff633fdd%3A0x85ee85db9cb263ba!2zUXXhuq1uIDYsIFRow6BuaCBwaOG7kSBI4buTIENow60gTWluaCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1652620862173!5m2!1svi!2s" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
-            <div class="col-6 border-start">
+            <div class="col-12 col-md-6 border-start">
                 <h1 class="title1 text-dark">Liên hệ</h1>
                 <form method="post" action="{{ route('phanhoi') }}">
                     @csrf

@@ -48,6 +48,11 @@
             content: '\f006';
             font-family: FontAwesome;
         }
+        @media only screen and (max-width: 723px) {
+            label.star {
+                font-size: 14px;
+            }
+        }
     </style>
 @endsection
 @section('content')
@@ -62,16 +67,18 @@
             <table class="table">
                 <tbody>
                     <tr>
-                        <td><img src="@{{ item.img }}" alt="@{{ item.ten }}" height="450px" width="100%">
+                        <td><img class="d-none d-md-block" src="@{{ item.img }}" alt="@{{ item.ten }}" height="450px" width="100%">
+                            <img class="d-block d-md-none" src="@{{ item.img }}" alt="@{{ item.ten }}" height="275px" width="100%">
                         </td>
                         <td>
-                            <h1 class="text-center">@{{ item.ten }}
-                            </h1>
+                            <h1 class="text-center d-none d-md-block">@{{ item.ten }}</h1>
+                            <h3 class="text-center d-block d-md-none">@{{ item.ten }}</h3>
                             <h6><i>Lược xem:@{{ item.luotxem }}</i></h6>
                             <hr size="4">
                             <form action="{{ route('cart.add') }}">
                                 <input type="hidden" name="id" value="{{ $sanpham[0]->id }}">
-                                <h2 class="my-3">Size sản phẩm:</h2>
+                                <h2 class="my-3 d-none d-md-block">Size sản phẩm:</h2>
+                                <h4 class="my-3 d-block d-md-none">Size sản phẩm:</h4>
                                 <select name="size" class="form-control">
                                     @foreach ($sizect as $item)
                                         @php
@@ -80,19 +87,27 @@
                                         <option value=" {{ $size[0]->id }}"> {{ $size[0]->size }}</option>
                                     @endforeach
                                 </select>
-                                <h2 class="my-3">Số lượng: </h2>
-                                <h2 class="my-3"> <input type="number" name="sl" ng-model="sl" ng-change="kt()"
+                                <h2 class="my-3 d-none d-md-block">Số lượng: </h2>
+                                <h4 class="my-3 d-block d-md-none">Số lượng: </h4>
+                                <h2 class="my-3 d-none d-md-block"> <input type="number" name="sl" ng-model="sl" ng-change="kt()"
                                         style="width: 100px;height: 100%;"></h2>
-                                <h2>Giá : @{{ item.gia | number }}đ Giảm gia:@{{ item.giamgia }}%</h2>
-                                <h2>Thành tiền : @{{ item.gia * sl * (100 - item.giamgia) / 100 | number }}đ</h2>
+                                        <h2 class="my-3 d-block d-md-none"> <input type="number" name="sl" ng-model="sl" ng-change="kt()"
+                                            style="width: 100px;height: 100%;"></h2>
+                                <h2 class="d-none d-md-block">Giá : @{{ item.gia | number }}đ Giảm gia:@{{ item.giamgia }}%</h2>
+                                <h6 class="d-block d-md-none">Giá : @{{ item.gia | number }}đ Giảm gia:@{{ item.giamgia }}%</h6>
+                                <h2 class="d-none d-md-block">Thành tiền : @{{ item.gia * sl * (100 - item.giamgia) / 100 | number }}đ</h2>
+                                <h6 class="d-block d-md-none">Thành tiền : @{{ item.gia * sl * (100 - item.giamgia) / 100 | number }}đ</h6>
                                 <div style="float: left;" ng-repeat="row in saotb">
-                                    <label  ng-if="row.gt==true" class="star " style="color: #FD4;"></label>
-                                    <label  ng-if="row.gt==false" class="star " ></label>
+                                    <label  ng-if="row.gt==true" class="star" style="color: #FD4;"></label>
+                                    <label  ng-if="row.gt==false" class="star"  ></label>
                                 </div>
-                                <h4> (@{{item.sl}} đánh giá / @{{item.diemtb}} Sao)</h4>
+                                <br>
+                                <h4 class="d-none d-md-block"> (@{{item.sl}} đánh giá / @{{item.diemtb}} Sao)</h4>
+                                <h6 class="d-block d-md-none"> (@{{item.sl}} đánh giá / @{{item.diemtb}} Sao)</h6>
                                 <br>
                                 <button class="btn btn-danger" type="submit">
-                                    <h2>Thêm vào giỏ</h2>
+                                    <h4 class="d-none d-md-block">Thêm vào giỏ</h4>
+                                    <h6 class="d-block d-md-none">Thêm vào giỏ</h6>
                                 </button>
                             </form>
                         </td>
@@ -104,12 +119,14 @@
             <ul class="nav justify-content-center">
                 <li class="nav-item">
                     <a class="nav-link" ng-class="active[0]" style="cursor: pointer" ng-click="tt(0)">
-                        <h1 class="text-dark">Thông tin chi tiết</h1>
+                        <h1 class="text-dark d-none d-md-block">Thông tin chi tiết</h1>
+                        <h3 class="text-dark d-block d-md-none">Thông tin chi tiết</h3>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" ng-class="active[1]" style="cursor: pointer" ng-click="bl(1)">
-                        <h1 class="text-dark">Đánh giá</h1>
+                        <h1 class="text-dark d-none d-md-block">Đánh giá</h1>
+                        <h3 class="text-dark d-block d-md-none">Đánh giá</h3>
                     </a>
                 </li>
             </ul>
@@ -124,6 +141,7 @@
                 @if ($sl[0]->sl == 0)
                     <h1 class="text-center my-5">------------------------Chưa có Đánh giá nào ---------------------</h1>
                 @else
+                <div>
                     <div class="ms-5" ng-repeat="item in listbl |limitTo  :page:start">
                         <div class="row border">
                             <div class="col-2">
@@ -134,7 +152,7 @@
                                 <br>
                                 @{{ item.kh.name }}
                             </div>
-                            <div class="col-10 ">
+                            <div class="col-10">
                                 <table class="table">
                                     <tr>
                                         <td> 
@@ -158,12 +176,13 @@
                                     ng-click="pageClick(item)">@{{ item }}</a></li>
                         </ul>
                     </nav>
+                </div>
                 @endif
                 @guest
                     <h4 class="text-center my-5">------------------------Bạn chưa đăng nhập---------------------</h4>
                 @else
                     <p class="mt-5">Tên:{{ Auth::user()->name }}</p>
-                    <div class="stars">
+                    <div class="stars ">
                         <form action=" {{ route('binhluan') }}" ng-submit="danhgia($event)" method="post">
                             @csrf
                             <input class="star star-5" id="star-5" type="radio" ng-model="star" required name="star"  value="5" />
