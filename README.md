@@ -1,2 +1,2 @@
-echo "# laravel-shopn-m" >> README.md
-đồ án tốt nghiệp
+Shopn$m php(laravel),angular js,mysql
+giao diện đã reponsive
